@@ -71,7 +71,7 @@ public class DialogueManager : MonoBehaviour
         playerMove.anim.SetBool("Walking", false);
         playerMove.anim.SetBool("Falling", false);
         playerMove.anim.SetBool("InAir", false);
-        playerMove.rb.velocity = Vector2.zero;
+        playerMove.rb.linearVelocity = Vector2.zero;
 
         playerMove.enabled = false;
     }

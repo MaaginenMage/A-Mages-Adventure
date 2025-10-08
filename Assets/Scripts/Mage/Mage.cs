@@ -64,13 +64,13 @@ public class Mage : MonoBehaviour
         AnimateAndMove();
 
         Jump();
-        if (rb.velocity.y < 0)
+        if (rb.linearVelocity.y < 0)
         {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
+            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
-        else if (rb.velocity.y > 0 && !Input.GetButton("Jump"))
+        else if (rb.linearVelocity.y > 0 && !Input.GetButton("Jump"))
         {
-            rb.velocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
+            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
 
 
@@ -96,7 +96,7 @@ public class Mage : MonoBehaviour
         }
 
         float HzMove = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(HzMove * MoveSpeed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(HzMove * MoveSpeed, rb.linearVelocity.y);
     }
 
 
@@ -218,7 +218,7 @@ public class Mage : MonoBehaviour
         {
             anim.SetBool("InAir", true);
 
-            if (rb.velocity.y < -0.1f) // going down
+            if (rb.linearVelocity.y < -0.1f) // going down
             {
                 anim.SetBool("Falling", true);
             }
@@ -253,7 +253,7 @@ public class Mage : MonoBehaviour
     {
         // Move left & right
         float HzMove = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(HzMove * MoveSpeed, rb.velocity.y);
+        rb.linearVelocity = new Vector2(HzMove * MoveSpeed, rb.linearVelocity.y);
 
         // Animate walking
         if (HzMove != 0)
@@ -289,13 +289,13 @@ public class Mage : MonoBehaviour
         if (direction == 0)
             direction = transform.localScale.x; // dash in facing direction if no input
 
-        rb.velocity = new Vector2(direction * DashForce, 0f);
+        rb.linearVelocity = new Vector2(direction * DashForce, 0f);
 
         anim.SetBool("Dashing", true);
 
         yield return new WaitForSeconds(DashTimer);
 
-        rb.velocity = new Vector2(direction * (DashForce / 2f), rb.velocity.y); // soften exit
+        rb.linearVelocity = new Vector2(direction * (DashForce / 2f), rb.linearVelocity.y); // soften exit
         rb.gravityScale = originalGravity;
         tr.emitting = false;
         IsDashing = false;
