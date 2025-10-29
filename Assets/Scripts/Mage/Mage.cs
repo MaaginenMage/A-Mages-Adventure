@@ -3,45 +3,60 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Mage : MonoBehaviour
 {
     public Rigidbody2D rb;
+    public PlayerInput playerInput;
     private SpriteRenderer sr;
     public Animator anim;
     private TrailRenderer tr;
     public Mages_Health MagesHealth;
     public Abilities MagesAbilities;
+    public Transform groundCheck;
+    public float gCheckRad;
+    public LayerMask groundLayer;
 
-    //public TextMesh KillCount;
-    //public TextMesh DeathCount;
-
-    //public Transform Camera;
-
+    [Header("Movement")]
     public float MoveSpeed;
-    public float JumpForce = 800f;
+    public float JumpForce;
+    public float JumpCut;
+    public float Gravity;
+    public float FallGravity;
+    public float JumpGravity;
     public float DashForce = 25f;
+
+    [Header("Inputs")]
+    private Vector2 MoveInput;
+    public bool JumpPressed;
+    private bool JumpReleased;
 
     public float fallMultiplier = 10f;
     public float lowJumpMultiplier = 8f;
-    public LayerMask groundLayer;
+    private bool isGrounded;
 
-    public bool AbletoShoot = true;
+    [Header("abilities")]
+    // star
+    public bool AbletoShoot;
     public float ShootCooldown = 7f;
-
+    // Dash
     private bool IsDashing;
-    public bool AbleToDash = true;
+    public bool AbleToDash;
     public float DashCooldown = 0.5f;
     private float DashTimer = 0.2f;
-
-    public bool AbleToUlt = true;
+    private Coroutine DashCoroutine;
+    // ult
+    public bool AbleToUlt;
     public float UltCooldown = 100f;
 
-    private int freetime = 0;
+    [Header("Misc")]
+    // flowers
+    private bool stuck = false;
+    private float freetime = 0;
     private bool invincible = false;
 
-    private Coroutine AbleToJump; // null = can jump
-    private Coroutine DashCoroutine;
+
 
     private void Start()
     {
@@ -61,20 +76,10 @@ public class Mage : MonoBehaviour
             return;
         }
 
-        AnimateAndMove();
+        Flip();
+        HandleAnimations();
 
-        Jump();
-        if (rb.linearVelocity.y < 0)
-        {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
-        }
-        else if (rb.linearVelocity.y > 0 && !Input.GetButton("Jump"))
-        {
-            rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
-        }
-
-
-        if (AbleToDash == false && IsGrounded() && DashCoroutine == null)
+        if (AbleToDash == false && isGrounded && DashCoroutine == null)
         {
             DashCoroutine = StartCoroutine(WaitForDash());
         }
@@ -88,36 +93,162 @@ public class Mage : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         if (IsDashing)
         {
             return;
         }
 
-        float HzMove = Input.GetAxis("Horizontal");
-        rb.linearVelocity = new Vector2(HzMove * MoveSpeed, rb.linearVelocity.y);
+        CheckGrounded();
+        ApplyVariableGravity();
+        AnimateAndMove();
+        HandleJump();
     }
 
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void AnimateAndMove()
     {
-        if (collision.gameObject.tag == "EnemyHitbox")
+        float HzMove = MoveInput.x * MoveSpeed;
+        rb.linearVelocity = new Vector2(HzMove, rb.linearVelocity.y);
+        
+        // animate walking
+        if (HzMove != 0)
         {
-            Hit();
+            anim.SetBool("Walking", true);
+        }
+        else
+        {
+            anim.SetBool("Walking", false);
+        }
+
+        // Look down
+        //anim.SetBool("LookingDown", true);
+    }
+
+    private void HandleJump()
+    {
+        if (JumpPressed && isGrounded)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce);
+            JumpReleased = false;
+        }
+        JumpPressed = false;
+        if (JumpReleased)
+        {
+            if (rb.linearVelocityY > 0)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * JumpCut);
+            }
+            JumpReleased = false;
         }
     }
+
+    void HandleAnimations()
+    {
+        if (!isGrounded)
+        {
+            anim.SetBool("InAir", true);
+
+            if (rb.linearVelocity.y < -0.1f) // going down
+            {
+                anim.SetBool("Falling", true);
+            }
+            else // going up
+            {
+                anim.SetBool("Falling", false);
+            }
+        }
+        if (isGrounded)
+        {
+            anim.SetBool("InAir", false);
+            anim.SetBool("Falling", false);
+        }
+    }
+
+
+    void CheckGrounded()
+    {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, gCheckRad, groundLayer);
+    }
+
+    void Flip()
+    {
+        if (MoveInput.x > 0.1f)
+        {
+            sr.flipX = false;
+        }
+        else if (MoveInput.x < -0.1f)
+        {
+            sr.flipX = true;
+        }
+    }
+
+    void ApplyVariableGravity()
+    {
+        if (rb.linearVelocity.y < -0.1f)
+        {
+            rb.gravityScale = FallGravity;
+        }
+        else if (rb.linearVelocity.y > 0.1f)
+        {
+            rb.gravityScale = JumpGravity;
+        }
+        else
+        {
+            rb.gravityScale = Gravity;
+        }
+    }
+
+    public void OnMove(InputValue inValue)
+    {
+        MoveInput = inValue.Get<Vector2>();
+    }
+
+    public void OnJump(InputValue inValue)
+    {
+        if (inValue.isPressed)
+        {
+            JumpPressed = true;
+            JumpReleased = false;
+        }
+        else
+        {
+            JumpReleased = true;
+        }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(groundCheck.position, gCheckRad);
+    }
+
+
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Flowers
         if (collision.gameObject.name == "HealFlowerTrigger")
         {
+            stuck = true;
             MagesHealth.Healing = true;
-            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            rb.gravityScale = 3f;
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            if (isGrounded)
+            {
+                rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+            }
         }
         if (collision.gameObject.tag == "Flower")
         {
-            rb.constraints = RigidbodyConstraints2D.FreezeAll;
+            stuck = true;
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+            if (isGrounded)
+            {
+                rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+            }
         }
 
         if (collision.gameObject.name == "SkillBook-1")
@@ -147,20 +278,26 @@ public class Mage : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "HealFlowerTrigger" || collision.gameObject.tag == "Flower")
+        if (stuck && collision.gameObject.name == "HealFlowerTrigger" || collision.gameObject.tag == "Flower")
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (isGrounded)
+            {
+                rb.constraints = RigidbodyConstraints2D.FreezePositionY;
+            }
+            if (JumpPressed)
             {
                 freetime++;
-                if (freetime == 3)
+                if (freetime >= 3)
                 {
-                    rb.constraints = RigidbodyConstraints2D.None;
-                    rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                    stuck = false;
+                    freetime = 0;
+                    MagesHealth.Healing = false;
+                    rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
                 }
             }
         }
 
-        if (collision.gameObject.tag == "Spike")
+        if (collision.gameObject.tag == "Spike" || collision.gameObject.tag == "EnemyHitbox")
         {
             Hit();
         }
@@ -169,8 +306,10 @@ public class Mage : MonoBehaviour
     {
         if (collision.gameObject.name == "HealFlowerTrigger" || collision.gameObject.tag == "Flower")
         {
-            MagesHealth.Healing = false;
+            stuck = false;
             freetime = 0;
+            MagesHealth.Healing = false;
+            rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
         }
     }
 
@@ -200,83 +339,6 @@ public class Mage : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
-
-    public void Jump()
-    {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            if (AbleToJump == null)
-            {
-                if (IsGrounded())
-                {
-                    AbleToJump = StartCoroutine(JumpCooldown());
-                    rb.AddForce(Vector2.up * JumpForce);
-                }
-            }
-        }
-        if (!IsGrounded())
-        {
-            anim.SetBool("InAir", true);
-
-            if (rb.linearVelocity.y < -0.1f) // going down
-            {
-                anim.SetBool("Falling", true);
-            }
-            else // going up
-            {
-                anim.SetBool("Falling", false);
-            }
-        }
-        if (IsGrounded() && AbleToJump == null)
-        {
-            anim.SetBool("InAir", false);
-            anim.SetBool("Falling", false);
-        }
-    }
-
-    public bool IsGrounded()
-    {
-        Vector2 startPoint = new Vector2(transform.position.x - 0.3f, transform.position.y - 1.55f);
-        Vector2 endPoint = new Vector2(transform.position.x + 0.3f, transform.position.y - 1.55f);
-
-        RaycastHit2D hit = Physics2D.Linecast(startPoint, endPoint, groundLayer);
-        return hit.collider != null;
-    }
-
-    IEnumerator JumpCooldown()
-    {
-        yield return new WaitForSeconds(0.1f);
-        AbleToJump = null;
-    }
-
-    private void AnimateAndMove()
-    {
-        // Move left & right
-        float HzMove = Input.GetAxis("Horizontal");
-        rb.linearVelocity = new Vector2(HzMove * MoveSpeed, rb.linearVelocity.y);
-
-        // Animate walking
-        if (HzMove != 0)
-        {
-            anim.SetBool("Walking", true);
-        }
-        else
-        {
-            anim.SetBool("Walking", false);
-        }
-        // Flip sprite
-        if (HzMove > 0)
-        {
-            sr.flipX = false;
-        }
-        if (HzMove < 0)
-        {
-            sr.flipX = true;
-        }
-
-        // Look down
-        anim.SetBool("LookingDown", Input.GetKey(KeyCode.S));
-    }
     private IEnumerator Dash()
     {
         IsDashing = true;
