@@ -4,9 +4,21 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR;
 
 public class Mage : MonoBehaviour
 {
+    public BaseState currentState;
+    public IdleState idleState;
+    public JumpState jumpState;
+    public MoveState moveState;
+    public AttackState attackState;
+    public SpellState spellState;
+
+    [Header("Core Components")]
+    public Combat combat;
+
+    [Header("Components")]
     public Rigidbody2D rb;
     public PlayerInput playerInput;
     private SpriteRenderer sr;
@@ -28,13 +40,15 @@ public class Mage : MonoBehaviour
     public float DashForce = 25f;
 
     [Header("Inputs")]
-    private Vector2 MoveInput;
+    public Vector2 MoveInput;
     public bool JumpPressed;
-    private bool JumpReleased;
+    public bool JumpReleased;
+    public bool attackPressed;
+    public bool starSpellPressed;
 
     public float fallMultiplier = 10f;
     public float lowJumpMultiplier = 8f;
-    private bool isGrounded;
+    public bool isGrounded;
 
     [Header("abilities")]
     // star
@@ -57,6 +71,16 @@ public class Mage : MonoBehaviour
     private bool invincible = false;
 
 
+    private void Awake()
+    {
+        idleState = new IdleState(this);
+        jumpState = new JumpState(this);
+        moveState = new MoveState(this);
+        attackState = new AttackState(this);
+        spellState = new SpellState(this);
+
+        ChangeState(idleState);
+    }
 
     private void Start()
     {
@@ -64,6 +88,7 @@ public class Mage : MonoBehaviour
         sr = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
         tr = GetComponentInChildren<TrailRenderer>();
+        ChangeState(idleState);
         tr.emitting = false; // start disabled
 
         DashCoroutine = null;
@@ -71,101 +96,66 @@ public class Mage : MonoBehaviour
 
     private void Update()
     {
+        currentState.Update();
+        if (currentState == null)
+        {
+            ChangeState(idleState);
+        }
         if (IsDashing)
         {
             return;
         }
 
         Flip();
-        HandleAnimations();
+        //HandleAnimations();
 
         if (AbleToDash == false && isGrounded && DashCoroutine == null)
         {
             DashCoroutine = StartCoroutine(WaitForDash());
         }
 
-        if (MagesAbilities.DashUnlocked == true)
+        /* if (MagesAbilities.DashUnlocked == true)
         {
             if (Input.GetKey(KeyCode.LeftShift) && AbleToDash && DashCoroutine == null)
             {
                 StartCoroutine(Dash());
             }
-        }
+        } */
     }
 
     void FixedUpdate()
     {
+        currentState.FixedUpdate();
         if (IsDashing)
         {
             return;
         }
-
         CheckGrounded();
-        ApplyVariableGravity();
         AnimateAndMove();
-        HandleJump();
+    }
+
+    public void ChangeState(BaseState newState)
+    {
+        if (currentState != null)
+        {
+            currentState.Exit();
+        }
+        
+        currentState = newState;
+        currentState.Enter();
+    }
+
+    public void AnimationFinish()
+    {
+        currentState.AnimationFinish();
     }
 
 
     private void AnimateAndMove()
     {
-        float HzMove = MoveInput.x * MoveSpeed;
-        rb.linearVelocity = new Vector2(HzMove, rb.linearVelocity.y);
-        
-        // animate walking
-        if (HzMove != 0)
-        {
-            anim.SetBool("Walking", true);
-        }
-        else
-        {
-            anim.SetBool("Walking", false);
-        }
-
         // Look down
         //anim.SetBool("LookingDown", true);
     }
-
-    private void HandleJump()
-    {
-        if (JumpPressed && isGrounded)
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, JumpForce);
-            JumpReleased = false;
-        }
-        JumpPressed = false;
-        if (JumpReleased)
-        {
-            if (rb.linearVelocityY > 0)
-            {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * JumpCut);
-            }
-            JumpReleased = false;
-        }
-    }
-
-    void HandleAnimations()
-    {
-        if (!isGrounded)
-        {
-            anim.SetBool("InAir", true);
-
-            if (rb.linearVelocity.y < -0.1f) // going down
-            {
-                anim.SetBool("Falling", true);
-            }
-            else // going up
-            {
-                anim.SetBool("Falling", false);
-            }
-        }
-        if (isGrounded)
-        {
-            anim.SetBool("InAir", false);
-            anim.SetBool("Falling", false);
-        }
-    }
-
 
     void CheckGrounded()
     {
@@ -174,17 +164,21 @@ public class Mage : MonoBehaviour
 
     void Flip()
     {
-        if (MoveInput.x > 0.1f)
+        if (MoveInput.x > 0.1f && currentState != attackState)
         {
             sr.flipX = false;
+            combat.attackPoint.localPosition = new Vector3(-combat.attackPoint.localPosition.x, combat.attackPoint.localPosition.y, combat.attackPoint.localPosition.z);
+            combat.hitFXloc.localPosition = new Vector3(-combat.hitFXloc.localPosition.x, combat.hitFXloc.localPosition.y, combat.hitFXloc.localPosition.z);
         }
-        else if (MoveInput.x < -0.1f)
+        else if (MoveInput.x < -0.1f && currentState != attackState)
         {
             sr.flipX = true;
+            combat.attackPoint.localPosition = new Vector3( -combat.attackPoint.localPosition.x, combat.attackPoint.localPosition.y, combat.attackPoint.localPosition.z);
+            combat.hitFXloc.localPosition = new Vector3(-combat.hitFXloc.localPosition.x, combat.hitFXloc.localPosition.y, combat.hitFXloc.localPosition.z);
         }
     }
 
-    void ApplyVariableGravity()
+    public void ApplyVariableGravity()
     {
         if (rb.linearVelocity.y < -0.1f)
         {
@@ -199,6 +193,7 @@ public class Mage : MonoBehaviour
             rb.gravityScale = Gravity;
         }
     }
+
 
     public void OnMove(InputValue inValue)
     {
@@ -217,6 +212,16 @@ public class Mage : MonoBehaviour
             JumpReleased = true;
         }
     }
+
+    public void OnAttack(InputValue value)
+    {
+        attackPressed = value.isPressed;
+    }
+    public void OnSpell1(InputValue value)
+    {
+        starSpellPressed = value.isPressed;
+    }
+
 
     private void OnDrawGizmosSelected()
     {

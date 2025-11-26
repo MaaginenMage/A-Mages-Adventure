@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: cf1d323e814ace349a6aa1c786a5d543
+guid: 0ebc5ccb34166cd4d87ed7a921383245
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -97,35 +97,35 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Fallen(1)_4
+      name: Fallen_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 40
-        width: 360
-        height: 170
+        x: 30
+        y: 375
+        width: 80
+        height: 84
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 0, y: 84, z: 80, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6543b171efd4e98468d886813d3faac1
-      internalID: -1598947907
+      spriteID: ea2d5082c6e2bba47a5491f20bd22997
+      internalID: 1814808545
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Fallen(1)_0
+      name: FallenDead_0
       rect:
         serializedVersion: 2
-        x: 379
-        y: 47
-        width: 360
-        height: 170
+        x: 7
+        y: 286
+        width: 78
+        height: 74
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,8 +134,74 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c511255ead9fb28429a99721c404faa4
-      internalID: -1962648281
+      spriteID: 374ace110cd474c438e1a1da1cc89a7f
+      internalID: 599126857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallenDead_1
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 340
+        width: 85
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4ced3f13f4c452840a40390f955bbd7d
+      internalID: -726362102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallenDead_2
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 287
+        width: 53
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1723843df4063e46b82be489bd913ad
+      internalID: -1240616362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: FallenDead_3
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 286
+        width: 73
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 703f987bb2ddd19449deef7974c524a6
+      internalID: 504912659
       vertices: []
       indices: 
       edges: []
@@ -154,11 +220,15 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Fallen(1)_0: -1962648281
-      Fallen(1)_1: 917784676
-      Fallen(1)_2: 2055204803
-      Fallen(1)_3: 619178643
-      Fallen(1)_4: -1598947907
+      FallenDead_0: 599126857
+      FallenDead_1: -726362102
+      FallenDead_2: -1240616362
+      FallenDead_3: 504912659
+      Fallen_0: 1814808545
+      Fallen_1: 1594024675
+      Fallen_2: -120880946
+      Fallen_3: 433543124
+      Fallen_4: 367563247
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

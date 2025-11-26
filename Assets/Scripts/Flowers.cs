@@ -3,12 +3,16 @@ using UnityEngine;
 public class Flowers : MonoBehaviour
 {
     private Mage playerMove;
-    private bool stuck = false;
-    private int freetime = 0;
+    private Rigidbody2D rb;
+    public GameObject mashText;
+    private bool stuck;
+    private float freetime;
 
     void Start()
     {
         playerMove = GameObject.Find("Mage").GetComponent<Mage>();
+        mashText.SetActive(false);
+        rb = playerMove.rb;
     }
 
     // Update is called once per frame
@@ -16,15 +20,22 @@ public class Flowers : MonoBehaviour
     {
         if (stuck)
         {
+            mashText.SetActive(true);
             StopPlayer();
             if (playerMove.JumpPressed)
             {
+                Debug.Log("Jump");
                 freetime++;
-                if (freetime >= 5)
+                if (freetime >= 10)
                 {
                     FreePlayer();
                 }
             }
+        }
+        if (stuck && playerMove.isGrounded)
+        {
+            rb.constraints =
+                RigidbodyConstraints2D.FreezeAll;
         }
     }
 
@@ -32,8 +43,8 @@ public class Flowers : MonoBehaviour
     {
         if (collision.gameObject.name == "Mage")
         {
-            playerInside = true;
-            mashCount = 0;
+            stuck = true;
+            freetime = 0;
         }
     }
 
@@ -48,20 +59,22 @@ public class Flowers : MonoBehaviour
 
     void StopPlayer()
     {
-        playerMove.anim.SetBool("Walking", false);
-        playerMove.anim.SetBool("Falling", false);
-        playerMove.anim.SetBool("InAir", false);
-        playerMove.rb.linearVelocity = Vector2.zero;
+        Debug.Log("Stop");
+        playerMove.anim.SetBool("LookingDown", true);
 
-        playerMove.enabled = false;
+        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+
+        rb.constraints =
+            RigidbodyConstraints2D.FreezePositionX |
+            RigidbodyConstraints2D.FreezeRotation;
     }
 
     void FreePlayer()
     {
-        playerMove.anim.SetBool("Walking", true);
-        playerMove.anim.SetBool("Falling", true);
-        playerMove.anim.SetBool("InAir", true);
-
-        playerMove.enabled = true;
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        stuck = false;
+        freetime = 0;
+        mashText.SetActive(false);
+        playerMove.anim.SetBool("LookingDown", false);
     }
 }

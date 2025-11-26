@@ -1,0 +1,457 @@
+fileFormatVersion: 2
+guid: fe995b31261049343ab602aef515568e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8512027137738272797
+    second: HitFx_0
+  - first:
+      213: 4770687891264824778
+    second: HitFx_1
+  - first:
+      213: 6258368652032313038
+    second: HitFx_2
+  - first:
+      213: 7840420900540972792
+    second: HitFx_3
+  - first:
+      213: 4815883828558734903
+    second: HitFx_4
+  - first:
+      213: -3611766674120136336
+    second: HitFx_5
+  - first:
+      213: 8951076910236608914
+    second: HitFx_6
+  - first:
+      213: -1756791885277573791
+    second: HitFx_7
+  - first:
+      213: -9136271531906407611
+    second: HitFx_8
+  - first:
+      213: 5615517632913815770
+    second: HitFx_9
+  - first:
+      213: 9159075853057012560
+    second: HitFx_10
+  - first:
+      213: 5295848556207803463
+    second: HitFx_11
+  - first:
+      213: 7693240475046161787
+    second: HitFx_12
+  - first:
+      213: 8464734904303115340
+    second: HitFx_13
+  - first:
+      213: 7670668997917181064
+    second: HitFx_14
+  - first:
+      213: 629967929005796622
+    second: HitFx_15
+  - first:
+      213: 4517443265398539234
+    second: HitFx_16
+  - first:
+      213: -2446559471950639184
+    second: HitFx_17
+  - first:
+      213: -9143375282866189088
+    second: HitFx_18
+  - first:
+      213: -659401915442404691
+    second: HitFx_19
+  - first:
+      213: -5131136771954427850
+    second: HitFx_20
+  - first:
+      213: -3170000759400542344
+    second: HitFx_21
+  - first:
+      213: -8091988752924491930
+    second: HitFx_22
+  - first:
+      213: -5351722862710270564
+    second: HitFx_23
+  - first:
+      213: -6174877356362160804
+    second: HitFx_24
+  - first:
+      213: 471548112894950391
+    second: HitFx_25
+  - first:
+      213: 530859791179563646
+    second: HitFx_26
+  - first:
+      213: 5566702479643879786
+    second: HitFx_27
+  - first:
+      213: 6966423716941096513
+    second: HitFx_28
+  - first:
+      213: 4376649978897193103
+    second: HitFx_29
+  - first:
+      213: 2492980517627447574
+    second: HitFx_30
+  - first:
+      213: 1687491993089357552
+    second: HitFx_31
+  - first:
+      213: 5418064980475235257
+    second: HitFx_32
+  - first:
+      213: -1474287519278058887
+    second: HitFx_33
+  - first:
+      213: -4717109627545286543
+    second: HitFx_34
+  - first:
+      213: -7514814062153713411
+    second: HitFx_35
+  - first:
+      213: 5241222761402277615
+    second: HitFx_36
+  - first:
+      213: 3594600316815134386
+    second: HitFx_37
+  - first:
+      213: -1128187908932691464
+    second: HitFx_38
+  - first:
+      213: -1232781294076521509
+    second: HitFx_39
+  - first:
+      213: 1544008909002770478
+    second: HitFx_40
+  - first:
+      213: -8289059535955863409
+    second: HitFx_41
+  - first:
+      213: 3922694048034880839
+    second: HitFx_42
+  - first:
+      213: 6506086960921449776
+    second: HitFx_43
+  - first:
+      213: -2856189052016723350
+    second: HitFx_44
+  - first:
+      213: 8909359288923486433
+    second: HitFx_45
+  - first:
+      213: -8949075529777144255
+    second: HitFx_46
+  - first:
+      213: 7068960594014494482
+    second: HitFx_47
+  - first:
+      213: 4562002028026714085
+    second: HitFx_48
+  - first:
+      213: 5272657256269662232
+    second: HitFx_49
+  - first:
+      213: -465878493195240606
+    second: HitFx_50
+  - first:
+      213: 1111479791773887192
+    second: HitFx_51
+  - first:
+      213: 4327021586555004998
+    second: HitFx_52
+  - first:
+      213: 4488288413074344098
+    second: HitFx_53
+  - first:
+      213: -5198572629071462701
+    second: HitFx_54
+  - first:
+      213: 8513807991636031878
+    second: HitFx_55
+  - first:
+      213: -133381551814191490
+    second: HitFx_56
+  - first:
+      213: 783273695301570672
+    second: HitFx_57
+  - first:
+      213: -5201644893149446464
+    second: HitFx_58
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HitFx_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 640
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3ef00a8ba643fd980800000000000000
+      internalID: -8512027137738272797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HitFx_1
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 640
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac5e8156c53e43240800000000000000
+      internalID: 4770687891264824778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HitFx_2
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 640
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec683d971213ad650800000000000000
+      internalID: 6258368652032313038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HitFx_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8fefa4ac445cecc60800000000000000
+      internalID: 7840420900540972792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HitFx_4
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 320
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 736aac093d475d240800000000000000
+      internalID: 4815883828558734903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HitFx_5
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 320
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 079a979885d60edc0800000000000000
+      internalID: -3611766674120136336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HitFx_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 320
+        height: 320
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 299aad7660d983c70800000000000000
+      internalID: 8951076910236608914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 6136cc837bc3e0d4ea786f0ee4b16405
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":320.0,"y":320.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      HitFx_0: -8512027137738272797
+      HitFx_1: 4770687891264824778
+      HitFx_2: 6258368652032313038
+      HitFx_3: 7840420900540972792
+      HitFx_4: 4815883828558734903
+      HitFx_5: -3611766674120136336
+      HitFx_6: 8951076910236608914
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

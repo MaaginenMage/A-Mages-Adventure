@@ -14,6 +14,7 @@ public class Detector : MonoBehaviour
     {
         if (collision.CompareTag(detected))
         {
+            Debug.Log("In");
             InArea = true;
         }
         if (gameObject.tag == "Fall" && collision.CompareTag(detected))
