@@ -13,7 +13,11 @@ public class IdleState : BaseState
     public override void Update()
     {
         base.Update();
-        if (AttackPressed && combat.canAttack)
+        if (SpellPressed)
+        {
+            player.ChangeState(player.spellState);
+        }
+        else if (AttackPressed && combat.canAttack)
         {
             player.ChangeState(player.attackState);
         }

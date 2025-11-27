@@ -17,6 +17,7 @@ public class Mage : MonoBehaviour
 
     [Header("Core Components")]
     public Combat combat;
+    public Magic magic;
 
     [Header("Components")]
     public Rigidbody2D rb;
@@ -38,13 +39,14 @@ public class Mage : MonoBehaviour
     public float FallGravity;
     public float JumpGravity;
     public float DashForce = 25f;
+    private bool facingRight;
 
     [Header("Inputs")]
     public Vector2 MoveInput;
     public bool JumpPressed;
     public bool JumpReleased;
     public bool attackPressed;
-    public bool starSpellPressed;
+    public bool spellPressed;
 
     public float fallMultiplier = 10f;
     public float lowJumpMultiplier = 8f;
@@ -149,6 +151,10 @@ public class Mage : MonoBehaviour
     {
         currentState.AnimationFinish();
     }
+    public void SpellAnimationFinish()
+    {
+        currentState.SpellAnimationFinish();
+    }
 
 
     private void AnimateAndMove()
@@ -164,17 +170,23 @@ public class Mage : MonoBehaviour
 
     void Flip()
     {
-        if (MoveInput.x > 0.1f && currentState != attackState)
+        if (MoveInput.x > 0.1f && !facingRight && currentState != attackState)
         {
+            facingRight = !facingRight;
             sr.flipX = false;
-            combat.attackPoint.localPosition = new Vector3(-combat.attackPoint.localPosition.x, combat.attackPoint.localPosition.y, combat.attackPoint.localPosition.z);
-            combat.hitFXloc.localPosition = new Vector3(-combat.hitFXloc.localPosition.x, combat.hitFXloc.localPosition.y, combat.hitFXloc.localPosition.z);
+            float x = Mathf.Abs(combat.attackPoint.localPosition.x);
+            combat.attackPoint.localPosition = new Vector3(facingRight ? x : -x, combat.attackPoint.localPosition.y, combat.attackPoint.localPosition.z);
+            float x2 = Mathf.Abs(combat.hitFXloc.localPosition.x);
+            combat.hitFXloc.localPosition = new Vector3(facingRight ? x2 : -x2, combat.hitFXloc.localPosition.y, combat.hitFXloc.localPosition.z);
         }
-        else if (MoveInput.x < -0.1f && currentState != attackState)
+        else if (MoveInput.x < -0.1f && facingRight && currentState != attackState)
         {
+            facingRight = !facingRight;
             sr.flipX = true;
-            combat.attackPoint.localPosition = new Vector3( -combat.attackPoint.localPosition.x, combat.attackPoint.localPosition.y, combat.attackPoint.localPosition.z);
-            combat.hitFXloc.localPosition = new Vector3(-combat.hitFXloc.localPosition.x, combat.hitFXloc.localPosition.y, combat.hitFXloc.localPosition.z);
+            float x = Mathf.Abs(combat.attackPoint.localPosition.x);
+            combat.attackPoint.localPosition = new Vector3(facingRight ? x : -x, combat.attackPoint.localPosition.y, combat.attackPoint.localPosition.z);
+            float x2 = Mathf.Abs(combat.hitFXloc.localPosition.x);
+            combat.hitFXloc.localPosition = new Vector3(facingRight ? x2 : -x2, combat.hitFXloc.localPosition.y, combat.hitFXloc.localPosition.z);
         }
     }
 
@@ -219,7 +231,7 @@ public class Mage : MonoBehaviour
     }
     public void OnSpell1(InputValue value)
     {
-        starSpellPressed = value.isPressed;
+        spellPressed = value.isPressed;
     }
 
 

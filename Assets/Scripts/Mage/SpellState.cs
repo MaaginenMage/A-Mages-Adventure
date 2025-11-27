@@ -7,10 +7,11 @@ public class SpellState : BaseState
     public override void Enter()
     {
         base.Enter();
+        player.spellPressed = false;
         anim.SetBool("Spell", true);
     }
 
-    public override void AnimationFinish()
+    public override void SpellAnimationFinish()
     {
         base.AnimationFinish();
 
@@ -25,7 +26,7 @@ public class SpellState : BaseState
 
     public override void Exit()
     {
-        base.Enter();
+        base.Exit();
         anim.SetBool("Spell", false);
     }
 }

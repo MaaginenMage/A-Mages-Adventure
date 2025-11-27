@@ -14,7 +14,11 @@ public class MoveState : BaseState
     public override void Update()
     {
         base.Update();
-        if (AttackPressed && combat.canAttack)
+        if (SpellPressed)
+        {
+            player.ChangeState(player.spellState);
+        }
+        else if (AttackPressed && combat.canAttack)
         {
             player.ChangeState(player.attackState);
         }
@@ -31,9 +35,16 @@ public class MoveState : BaseState
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-
         float HzMove = MoveInput.x * player.MoveSpeed;
-        rb.linearVelocity = new Vector2(HzMove, rb.linearVelocity.y);
+
+        if (Mathf.Abs(MoveInput.x) < 0.1f && player.isGrounded)
+        {
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
+        }
+        else
+        {
+            rb.linearVelocity = new Vector2(HzMove, rb.linearVelocity.y);
+        }
 
         // animate walking
         if (HzMove != 0)
