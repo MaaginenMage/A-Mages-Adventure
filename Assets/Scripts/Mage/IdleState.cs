@@ -7,21 +7,27 @@ public class IdleState : BaseState
     public override void Enter()
     {
         base.Enter();
+        JumpPressed = false;
+        player.attackPressed = false;
         rb.linearVelocity = new Vector2 (0, rb.linearVelocity.y);
     }
 
     public override void Update()
     {
         base.Update();
-        if (SpellPressed)
+        if (SpellPressed && magic.canCast && magic.availableSpells.Count > 0)
         {
             player.ChangeState(player.spellState);
         }
-        else if (AttackPressed && combat.canAttack)
+        else if (AttackPressed && combat.canAttack && !player.isAttacking)
         {
             player.ChangeState(player.attackState);
         }
-        else if (JumpPressed)
+        else if (rb.linearVelocity.y < -0.1f) // going down
+        {
+            player.ChangeState(player.fallState);
+        }
+        else if (JumpPressed && player.isGrounded && player.canJump)
         {
             JumpPressed = false;
             player.ChangeState(player.jumpState);

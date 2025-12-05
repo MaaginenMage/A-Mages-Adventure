@@ -15,9 +15,9 @@ public class Fallen : MonoBehaviour
 
     [Header("Function")]
     public Transform groundCheck;
-    public float gCheckRad;
+    public float gCheckRad = 0.5f;
     public LayerMask groundLayer;
-    private bool isGrounded;
+    public bool isGrounded;
     public float JumpForce = 20;
     public float fallMultiplier = 10f;
 
@@ -74,8 +74,6 @@ public class Fallen : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("Grounded: " + isGrounded);
-
         if (MoveDir == -1f)
         {
             sr.flipX = false;
@@ -84,30 +82,29 @@ public class Fallen : MonoBehaviour
         {
             sr.flipX = true;
         }
-        if (Physics2D.Raycast(transform.position + new Vector3(2.4f * MoveDir, 1.5f), Vector2.down, 2.8f, 1 << 8))
-        {
-            MoveDir *= -1;
-
-        }
         rb.linearVelocity = new Vector2(MoveDir * MoveSpeed, rb.linearVelocity.y);
 
-        if (IsOnEdge())
-        {
-            MoveDir *= -1;
-        }
-
-        /*if (!isGrounded)
+        if (!isGrounded)
         {
             anim.SetBool("Jumping", true); // In air
         }
-        else if (isGrounded)
+        else
         {
             anim.SetBool("Jumping", false); // On ground
-        }*/
+        }
     }
 
     void FixedUpdate()
     {
+        if (IsOnEdge() && isGrounded)
+        {
+            MoveDir *= -1;
+        }
+        else if (IsHittingWall())
+        {
+            MoveDir *= -1;
+
+        }
         CheckGrounded();
     }
 
@@ -137,22 +134,34 @@ public class Fallen : MonoBehaviour
     }
     void CheckGrounded()
     {
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, gCheckRad, groundLayer);
+        Collider2D hit = Physics2D.OverlapCircle(groundCheck.position, gCheckRad, groundLayer);
+        isGrounded = hit != null;
+
     }
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(groundCheck.position, gCheckRad);
     }
 
+    bool IsHittingWall()
+    {
+        Vector2 origin = (Vector2)transform.position + new Vector2(MoveDir * 2f, -0.5f);
+        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.right * MoveDir, 0.2f, groundLayer);
+
+        Debug.DrawRay(origin, Vector2.right * MoveDir * 0.2f, Color.red);
+
+        return hit.collider != null;
+    }
+
     bool IsOnEdge()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + new Vector3(2.5f * MoveDir, -1.5f), Vector2.right, 0.1f, 1 << 8);
-        if (hit.collider == null && isGrounded)
-        {
-            return true;
-        }
-        return false;
+        Vector2 origin = (Vector2)transform.position + new Vector2(MoveDir * 2f, -1.3f);
+        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.down, 0.3f, groundLayer);
+
+        Debug.DrawRay(origin, Vector2.down * 0.3f, Color.green);
+
+        return hit.collider == null;   // no ground = edge
     }
     IEnumerator JumpCooldown()
     {

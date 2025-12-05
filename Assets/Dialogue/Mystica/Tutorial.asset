@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ddea08db131b9429ea523af83ef27f, type: 3}
   m_Name: Tutorial
   m_EditorClassIdentifier: 
-  npcs: 000000000000000000000000
+  npcs: 0000000000000000000000000000000000000000
   dialogue:
-  - Heloooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
-  - Mageeeee
-  - Eeeeeeeeeeeee
+  - Mage!
+  - You're in a lot of trouble this time, you followed a butterfly here? Just to
+    be buried in a cave??
+  - '*sigh*, Alright, as your "guardian angel" I guess I have to help you again..'
+  - Go right, just... Be aware of anything that moves in there, you'll find your
+    way out eventually
+  - I hope....

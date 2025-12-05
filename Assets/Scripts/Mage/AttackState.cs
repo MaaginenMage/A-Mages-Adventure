@@ -9,14 +9,23 @@ public class AttackState : BaseState
     {
         base.Enter();
 
+        JumpPressed = false;
         player.attackPressed = false;
         anim.SetBool("Attacking", true);
-        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        if (player.isGrounded)
+        {
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
+        }
+        player.isAttacking = true;
     }
 
     public override void AnimationFinish()
     {
-        if (Mathf.Abs(MoveInput.x) > 0.1f)
+        if (!player.isGrounded)
+        {
+            player.ChangeState(player.fallState);
+        }
+        else if (Mathf.Abs(MoveInput.x) > 0.1f && player.isGrounded)
         {
             player.ChangeState(player.moveState);
         }
@@ -30,5 +39,6 @@ public class AttackState : BaseState
     {
         base.Exit();
         anim.SetBool("Attacking", false);
+        player.isAttacking = false;
     }
 }

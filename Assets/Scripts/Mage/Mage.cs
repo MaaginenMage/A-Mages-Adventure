@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.XR;
+using UnityEngine.SceneManagement;
 
 public class Mage : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class Mage : MonoBehaviour
     public MoveState moveState;
     public AttackState attackState;
     public SpellState spellState;
+    public FallState fallState;
 
     [Header("Core Components")]
     public Combat combat;
@@ -26,7 +28,6 @@ public class Mage : MonoBehaviour
     public Animator anim;
     private TrailRenderer tr;
     public Mages_Health MagesHealth;
-    public Abilities MagesAbilities;
     public Transform groundCheck;
     public float gCheckRad;
     public LayerMask groundLayer;
@@ -51,23 +52,10 @@ public class Mage : MonoBehaviour
     public float fallMultiplier = 10f;
     public float lowJumpMultiplier = 8f;
     public bool isGrounded;
-
-    [Header("abilities")]
-    // star
-    public bool AbletoShoot;
-    public float ShootCooldown = 7f;
-    // Dash
-    private bool IsDashing;
-    public bool AbleToDash;
-    public float DashCooldown = 0.5f;
-    private float DashTimer = 0.2f;
-    private Coroutine DashCoroutine;
-    // ult
-    public bool AbleToUlt;
-    public float UltCooldown = 100f;
+    public bool isAttacking = false;
+    public bool canJump = true;
 
     [Header("Misc")]
-    // flowers
     private bool stuck = false;
     private float freetime = 0;
     private bool invincible = false;
@@ -80,6 +68,7 @@ public class Mage : MonoBehaviour
         moveState = new MoveState(this);
         attackState = new AttackState(this);
         spellState = new SpellState(this);
+        fallState = new FallState(this);
 
         ChangeState(idleState);
     }
@@ -92,8 +81,6 @@ public class Mage : MonoBehaviour
         tr = GetComponentInChildren<TrailRenderer>();
         ChangeState(idleState);
         tr.emitting = false; // start disabled
-
-        DashCoroutine = null;
     }
 
     private void Update()
@@ -103,35 +90,22 @@ public class Mage : MonoBehaviour
         {
             ChangeState(idleState);
         }
-        if (IsDashing)
+        /*if (IsDashing)
         {
             return;
-        }
+        }*/
 
         Flip();
         //HandleAnimations();
-
-        if (AbleToDash == false && isGrounded && DashCoroutine == null)
-        {
-            DashCoroutine = StartCoroutine(WaitForDash());
-        }
-
-        /* if (MagesAbilities.DashUnlocked == true)
-        {
-            if (Input.GetKey(KeyCode.LeftShift) && AbleToDash && DashCoroutine == null)
-            {
-                StartCoroutine(Dash());
-            }
-        } */
     }
 
     void FixedUpdate()
     {
         currentState.FixedUpdate();
-        if (IsDashing)
+        /*if (IsDashing)
         {
             return;
-        }
+        }*/
         CheckGrounded();
         AnimateAndMove();
     }
@@ -142,7 +116,7 @@ public class Mage : MonoBehaviour
         {
             currentState.Exit();
         }
-        
+
         currentState = newState;
         currentState.Enter();
     }
@@ -229,11 +203,26 @@ public class Mage : MonoBehaviour
     {
         attackPressed = value.isPressed;
     }
-    public void OnSpell1(InputValue value)
+
+    public void OnSpell(InputValue value)
     {
         spellPressed = value.isPressed;
     }
 
+    public void OnPrevious(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            magic.PreviousSpell();
+        }
+    }
+    public void OnNext(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            magic.NextSpell();
+        }
+    }
 
     private void OnDrawGizmosSelected()
     {
@@ -266,19 +255,6 @@ public class Mage : MonoBehaviour
             {
                 rb.constraints = RigidbodyConstraints2D.FreezePositionY;
             }
-        }
-
-        if (collision.gameObject.name == "SkillBook-1")
-        {
-            MagesAbilities.StarUnlocked = true;
-        }
-        if (collision.gameObject.name == "SkillBook-2")
-        {
-            MagesAbilities.DashUnlocked = true;
-        }
-        if (collision.gameObject.name == "SkillBook-3")
-        {
-            MagesAbilities.UltUnlocked = true;
         }
 
         if (collision.gameObject.tag == "Spike")
@@ -349,14 +325,12 @@ public class Mage : MonoBehaviour
     IEnumerator Resurrect()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        anim.SetBool("InAir", true);
         yield return new WaitForSeconds(1f);
-        transform.position = new Vector3(-5, -2.48f, 0);
-        MagesHealth.Health = 7;
-        rb.constraints = RigidbodyConstraints2D.None;
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        FadeManager.instance.FadeAndLoadScene(SceneManager.GetActiveScene().name);
     }
 
-    private IEnumerator Dash()
+    /* private IEnumerator Dash()
     {
         IsDashing = true;
         AbleToDash = false;
@@ -392,5 +366,5 @@ public class Mage : MonoBehaviour
         yield return new WaitForSeconds(DashCooldown);
         DashCoroutine = null;
         AbleToDash = true;
-    }
+    }*/
 }

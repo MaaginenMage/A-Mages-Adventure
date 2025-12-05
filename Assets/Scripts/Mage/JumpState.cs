@@ -8,38 +8,26 @@ public class JumpState : BaseState
     {
         base.Enter();
         anim.SetBool("InAir", true);
+        player.canJump = false;
 
         rb.linearVelocity = new Vector2 (rb.linearVelocity.x, player.JumpForce);
 
         JumpPressed = false;
         JumpReleased = false;
+        player.attackPressed = false;
     }
 
     public override void Update()
     {
         base.Update();
-        if (player.isGrounded && rb.linearVelocity.y <= 0)
-        {
-            player.ChangeState(player.idleState);
-        }
 
-        if (!player.isGrounded)
+        if (rb.linearVelocity.y < -0.1f && !player.isGrounded) // going down
         {
-            anim.SetBool("InAir", true);
-
-            if (rb.linearVelocity.y < -0.1f) // going down
-            {
-                anim.SetBool("Falling", true);
-            }
-            else // going up
-            {
-                anim.SetBool("Falling", false);
-            }
+            player.ChangeState(player.fallState);
         }
-        if (player.isGrounded)
+        if (AttackPressed && combat.canAttack)
         {
-            anim.SetBool("InAir", false);
-            anim.SetBool("Falling", false);
+            player.ChangeState(player.attackState);
         }
     }
 
@@ -67,7 +55,7 @@ public class JumpState : BaseState
     public override void Exit()
     {
         base.Exit();
-
         anim.SetBool("InAir", false);
+        player.canJump = true;
     }
 }

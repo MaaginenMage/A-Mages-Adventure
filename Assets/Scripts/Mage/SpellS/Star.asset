@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bc7b68a110c63c46a7856404aa361e9, type: 3}
+  m_Name: Star
+  m_EditorClassIdentifier: Assembly-CSharp::StarSpellSO
+  itemName: Star
+  icon: {fileID: 1038636052, guid: 323af04f682732d40b8621e46e04a2da, type: 3}
+  cooldown: 5
+  starPrefab: {fileID: 4499596904600870716, guid: 55d9a25a9de3b9a43bf74fae0649f96d, type: 3}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 768
+  obstacle:
+    serializedVersion: 2
+    m_Bits: 1024
+  speed: 25
+  waveAmplitude: 3
+  waveFrequency: 7
+  damage: 5

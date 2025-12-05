@@ -8,23 +8,29 @@ public class MoveState : BaseState
     public override void Enter()
     {
         base.Enter();
+        JumpPressed = false;
+        player.attackPressed = false;
         anim.SetBool("Walking", true);
     }
 
     public override void Update()
     {
         base.Update();
-        if (SpellPressed)
+        if (SpellPressed && magic.canCast && magic.availableSpells.Count > 0)
         {
             player.ChangeState(player.spellState);
         }
-        else if (AttackPressed && combat.canAttack)
+        else if (AttackPressed && combat.canAttack && !player.isAttacking)
         {
             player.ChangeState(player.attackState);
         }
-        else if (JumpPressed)
+        else if (JumpPressed && player.isGrounded && player.canJump)
         {
             player.ChangeState(player.jumpState);
+        }
+        if (rb.linearVelocity.y < -0.1f) // going down
+        {
+            player.ChangeState(player.fallState);
         }
         else if (Mathf.Abs(MoveInput.x) < 0.1f)
         {
