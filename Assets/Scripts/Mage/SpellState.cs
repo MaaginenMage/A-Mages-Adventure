@@ -15,7 +15,10 @@ public class SpellState : BaseState
     {
         base.AnimationFinish();
 
-        if (Mathf.Abs(MoveInput.x) > 0.1f)
+        if (!player.isGrounded)
+        {
+            player.ChangeState(player.fallState);
+        } else if (Mathf.Abs(MoveInput.x) > 0.1f)
         {
             player.ChangeState(player.moveState);
         } else

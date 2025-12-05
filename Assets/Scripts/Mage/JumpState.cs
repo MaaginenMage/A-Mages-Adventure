@@ -29,6 +29,10 @@ public class JumpState : BaseState
         {
             player.ChangeState(player.attackState);
         }
+        if (SpellPressed && magic.canCast && magic.availableSpells.Count > 0)
+        {
+            player.ChangeState(player.spellState);
+        }
     }
 
     public override void FixedUpdate()

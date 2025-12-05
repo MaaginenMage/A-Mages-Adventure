@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class Magic : MonoBehaviour
 {
     public Mage player;
+
     public SpellUiManager spellUiManager;
 
     public List<SpellSO> availableSpells = new List<SpellSO>();

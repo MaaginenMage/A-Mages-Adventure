@@ -17,6 +17,10 @@ public class FallState : BaseState
     {
         base.Update();
 
+        if (SpellPressed && magic.canCast && magic.availableSpells.Count > 0)
+        {
+            player.ChangeState(player.spellState);
+        }
         if (AttackPressed && combat.canAttack)
         {
             player.ChangeState(player.attackState);

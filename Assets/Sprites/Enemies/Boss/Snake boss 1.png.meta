@@ -1,0 +1,253 @@
+fileFormatVersion: 2
+guid: 7091b35cbccad4141b35e5a24d2789ed
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8046718626392025386
+    second: Snake boss_0
+  - first:
+      213: -4085654594908539535
+    second: Snake boss_1
+  - first:
+      213: 8570674131972868242
+    second: Snake boss_2
+  - first:
+      213: 4574605419091805509
+    second: Snake boss_3
+  - first:
+      213: -4154734581429215881
+    second: Snake boss_4
+  - first:
+      213: -3659206770866685523
+    second: Snake boss_5
+  - first:
+      213: -7728733239613744737
+    second: Snake boss_6
+  - first:
+      213: -4802958386980264664
+    second: Snake boss_7
+  - first:
+      213: -2083309618935255142
+    second: Snake boss_8
+  - first:
+      213: 277615564166645430
+    second: Snake boss_9
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 900
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 4096
+    resizeAlgorithm: 1
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Snake boss 1_0
+      rect:
+        serializedVersion: 2
+        x: 1450
+        y: 580
+        width: 400
+        height: 300
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96a65bd73840f3644be6289eaf0cba30
+      internalID: 1760762136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake boss 1_1
+      rect:
+        serializedVersion: 2
+        x: 1180
+        y: 380
+        width: 390
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ddb698d51a5b59a48a5ee9d016d96b6d
+      internalID: -81112527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Snake boss 1_2
+      rect:
+        serializedVersion: 2
+        x: 998
+        y: 2540
+        width: 193
+        height: 416
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2efaad2224183248a805f5bbc1a6909
+      internalID: -2043157481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 3d37d3dfc66b5244bb0edbe501446044
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":1000.0,"y":1000.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Snake boss 1_0: 1760762136
+      Snake boss 1_1: -81112527
+      Snake boss 1_2: -2043157481
+      Snake boss_0: -8046718626392025386
+      Snake boss_1: -4085654594908539535
+      Snake boss_10: -1241946712
+      Snake boss_11: 782575583
+      Snake boss_12: -1801775876
+      Snake boss_13: 2036271704
+      Snake boss_14: -1320922888
+      Snake boss_15: 524012071
+      Snake boss_16: -1228757780
+      Snake boss_17: 514208244
+      Snake boss_18: -61945510
+      Snake boss_19: 805594113
+      Snake boss_2: 8570674131972868242
+      Snake boss_20: -816770379
+      Snake boss_21: -1784724741
+      Snake boss_22: -1389656896
+      Snake boss_23: 21940560
+      Snake boss_24: -106040918
+      Snake boss_25: -1039325734
+      Snake boss_26: 87615700
+      Snake boss_27: -1262987551
+      Snake boss_28: 144513450
+      Snake boss_29: 1086936223
+      Snake boss_3: 4574605419091805509
+      Snake boss_30: -780044010
+      Snake boss_31: -240017064
+      Snake boss_32: 2039085410
+      Snake boss_33: 1461230635
+      Snake boss_34: -1957881917
+      Snake boss_4: -4154734581429215881
+      Snake boss_5: -3659206770866685523
+      Snake boss_6: -7728733239613744737
+      Snake boss_7: -4802958386980264664
+      Snake boss_8: -2083309618935255142
+      Snake boss_9: 277615564166645430
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
