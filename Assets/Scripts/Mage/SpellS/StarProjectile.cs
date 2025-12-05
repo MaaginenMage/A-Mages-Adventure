@@ -5,7 +5,6 @@ public class WavyStarProjectile : MonoBehaviour
     public float speed = 10f;
     public float waveAmplitude = 1f;
     public float waveFrequency = 5f;
-    public GameObject bossHead;
     public int damage = 5;
     public float lifeTime = 4f;
     public int direction = 1;
@@ -34,16 +33,18 @@ public class WavyStarProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other == bossHead)
-        {
-            damage *= 3;
-        }
         Health h = other.GetComponent<Health>();
         if (h != null)
         {
-            h.ChangeHealth(-damage);
+            int finalDamage = damage;
+
+            if (other.CompareTag("BossHead"))
+            {
+                finalDamage *= 3;   // TRIPLE DAMAGE ON HEAD
+            }
+
+            h.ChangeHealth(-finalDamage);
             Destroy(gameObject);
         }
-        damage = 5;
     }
 }

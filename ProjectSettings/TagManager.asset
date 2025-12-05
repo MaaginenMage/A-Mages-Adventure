@@ -12,6 +12,7 @@ TagManager:
   - Npc
   - EnemyHitbox
   - Dash
+  - BossHead
   layers:
   - Default
   - TransparentFX

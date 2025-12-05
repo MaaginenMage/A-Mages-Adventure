@@ -1383,6 +1383,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3409564355230986472, guid: 83ce6435e8563c74eaed7b2a814e587a, type: 3}
+      propertyPath: bossHead
+      value: 
+      objectReference: {fileID: 1633189079}
+    - target: {fileID: 3409564355230986472, guid: 83ce6435e8563c74eaed7b2a814e587a, type: 3}
       propertyPath: spellUiManager
       value: 
       objectReference: {fileID: 1283644671}
@@ -56006,7 +56010,7 @@ Transform:
   m_GameObject: {fileID: 1633189079}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6, y: 9, z: 0}
+  m_LocalPosition: {x: 6, y: 10, z: 0}
   m_LocalScale: {x: 15, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -56531,6 +56535,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1852679939}
   - component: {fileID: 1852679940}
+  - component: {fileID: 1852679941}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -56569,7 +56574,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b9414fca0ddea6418cb256660d1c96f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Boss
+  health: {fileID: 1852679941}
   anim: {fileID: 1883079514}
+  Head: {fileID: 1633189079}
+  deathParts:
+  - {fileID: 2461140768906546355, guid: 892caa300761d4f41b1a6df234e77ad1, type: 3}
+  - {fileID: 2735219248023935004, guid: 4904222f369f1f54e8b5ff035b46f68c, type: 3}
+  - {fileID: 2735219248023935004, guid: 4904222f369f1f54e8b5ff035b46f68c, type: 3}
+  - {fileID: 8949838623261466489, guid: 4e9088bdf9eb99645a5fea9ce0e41cfe, type: 3}
+  force: 5
+  torgue: 5
+  lifetime: 2
+--- !u!114 &1852679941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852679938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac11a8482c43ff545be895c813b74509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Health
+  health: 0
+  maxHealth: 100
 --- !u!1 &1875407769
 GameObject:
   m_ObjectHideFlags: 0
