@@ -2,7 +2,7 @@ using TMPro.Examples;
 using UnityEngine;
 using System.Collections;
 
-public class SnakeBossTrigger : MonoBehaviour
+public class BossTrigger : MonoBehaviour
 {
     public Boss boss;
     public CameraController cameraController;
@@ -11,6 +11,7 @@ public class SnakeBossTrigger : MonoBehaviour
     public CanvasGroup fadeScreen; // black overlay
 
     private bool triggered;
+    public AudioClip roar;
 
     private void Start()
     {
@@ -40,6 +41,7 @@ public class SnakeBossTrigger : MonoBehaviour
 
         // 3. Animate giant eye blink
         boss.anim.SetTrigger("Started");
+        AudioManager.instance.PlaySFX(roar);
 
         yield return new WaitForSeconds(0.8f);
 

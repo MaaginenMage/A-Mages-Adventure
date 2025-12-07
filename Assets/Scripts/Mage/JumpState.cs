@@ -21,10 +21,24 @@ public class JumpState : BaseState
     {
         base.Update();
 
-        if (rb.linearVelocity.y < -0.1f && !player.isGrounded) // going down
+        // If the player is falling
+        if (rb.linearVelocity.y < -0.1f)
         {
             player.ChangeState(player.fallState);
+            return;
         }
+
+        // If the player has landed while still in jump
+        if (player.isGrounded && rb.linearVelocity.y <= 0f)
+        {
+            // Go to idle or move depending on input
+            if (Mathf.Abs(player.MoveInput.x) > 0.1f)
+                player.ChangeState(player.moveState);
+            else
+                player.ChangeState(player.idleState);
+            return;
+        }
+
         if (AttackPressed && combat.canAttack)
         {
             player.ChangeState(player.attackState);

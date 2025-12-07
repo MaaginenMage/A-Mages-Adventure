@@ -26,7 +26,7 @@ public class Platform_Right : MonoBehaviour
             }
             if (transform.position.y <= -11 && transform.position.x <= 251)
             {
-                transform.position += new Vector3(MoveDir * MoveSpeed, 0) * Time.deltaTime;
+                transform.position += new Vector3(MoveDir * MoveSpeed * 3, 0) * Time.deltaTime;
             }
         }
     }

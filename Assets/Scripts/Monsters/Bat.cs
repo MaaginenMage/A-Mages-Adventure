@@ -9,6 +9,7 @@ public class Bat : MonoBehaviour
     public bool chase = false;
     public Transform startingPoint;
     private GameObject player;
+    public AudioClip hitDmg;
 
     [SerializeField] private GameObject[] deathParts;
     [SerializeField] private float force = 5;
@@ -49,10 +50,12 @@ public class Bat : MonoBehaviour
     void HandleDamage()
     {
         anim.SetTrigger("isDamaged");
+        AudioManager.instance.PlaySFX(hitDmg);
     }
 
     void HandleDeath()
     {
+        AudioManager.instance.PlaySFX(hitDmg);
         foreach (GameObject prefab in deathParts)
         {
             Quaternion rotation = Quaternion.Euler(0f, 0f, Random.Range(0.5f, 1f)).normalized;

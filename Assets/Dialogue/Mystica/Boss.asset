@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3ddea08db131b9429ea523af83ef27f, type: 3}
+  m_Name: Boss
+  m_EditorClassIdentifier: 
+  npcs: 00000000000000000000000000000000
+  dialogue:
+  - So umm, Mage? I saw the butterfly and the exit but....
+  - I may have alerted a little snake in the process.
+  - It seemed it's head was pretty weak though, maybe you can use that if you see
+    it.
+  - Good luck.

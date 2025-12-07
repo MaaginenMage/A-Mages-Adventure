@@ -13,16 +13,17 @@ public class Detector : MonoBehaviour
     {
         if (collision.CompareTag(detected))
         {
-            Debug.Log("In");
             InArea = true;
         }
         if (gameObject.tag == "Fall" && collision.CompareTag(detected))
         {
-            mage.transform.position = new Vector3(-5, -2.48f, 0);
+            mage.MagesHealth.Health = 1;
+            mage.Hit();
         }
         if (gameObject.tag == "D-Spike" && collision.CompareTag(detected))
         {
-            mage.transform.position = new Vector3(-5, -2.48f, 0);
+            mage.MagesHealth.Health = 1;
+            mage.Hit();
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

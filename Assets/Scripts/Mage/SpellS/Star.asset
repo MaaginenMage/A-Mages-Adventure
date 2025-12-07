@@ -18,7 +18,7 @@ MonoBehaviour:
   starPrefab: {fileID: 4499596904600870716, guid: 55d9a25a9de3b9a43bf74fae0649f96d, type: 3}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 512
   obstacle:
     serializedVersion: 2
     m_Bits: 1024

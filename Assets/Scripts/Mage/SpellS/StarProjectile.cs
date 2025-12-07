@@ -33,17 +33,15 @@ public class WavyStarProjectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.tag == "Object")
+        {
+            other.gameObject.SetActive(false);
+            return;
+        }
         Health h = other.GetComponent<Health>();
         if (h != null)
         {
-            int finalDamage = damage;
-
-            if (other.CompareTag("BossHead"))
-            {
-                finalDamage *= 3;   // TRIPLE DAMAGE ON HEAD
-            }
-
-            h.ChangeHealth(-finalDamage);
+            h.ChangeHealth(-damage);
             Destroy(gameObject);
         }
     }

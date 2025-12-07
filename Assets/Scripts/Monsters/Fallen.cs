@@ -12,6 +12,7 @@ public class Fallen : MonoBehaviour
     private SpriteRenderer sr;
     public GameObject detect;
     private Animator anim;
+    public AudioClip hitDmg;
 
     [Header("Function")]
     public Transform groundCheck;
@@ -52,6 +53,7 @@ public class Fallen : MonoBehaviour
     void HandleDamage()
     {
         anim.SetTrigger("isDamaged");
+        AudioManager.instance.PlaySFX(hitDmg);
     }
 
     void HandleDeath()
@@ -147,9 +149,9 @@ public class Fallen : MonoBehaviour
     bool IsHittingWall()
     {
         Vector2 origin = (Vector2)transform.position + new Vector2(MoveDir * 2f, -0.5f);
-        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.right * MoveDir, 0.2f, groundLayer);
+        RaycastHit2D hit = Physics2D.Raycast(origin, Vector2.right * MoveDir, 0.3f, groundLayer);
 
-        Debug.DrawRay(origin, Vector2.right * MoveDir * 0.2f, Color.red);
+        Debug.DrawRay(origin, Vector2.right * MoveDir * 0.3f, Color.red);
 
         return hit.collider != null;
     }

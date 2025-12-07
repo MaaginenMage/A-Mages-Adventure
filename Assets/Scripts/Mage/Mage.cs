@@ -17,6 +17,9 @@ public class Mage : MonoBehaviour
     public SpellState spellState;
     public FallState fallState;
 
+    public AudioClip spell;
+    public AudioClip hitDmg;
+
     [Header("Core Components")]
     public Combat combat;
     public Magic magic;
@@ -59,6 +62,7 @@ public class Mage : MonoBehaviour
     private bool stuck = false;
     private float freetime = 0;
     private bool invincible = false;
+    public float knockbackForce = 10f;
 
 
     private void Awake()
@@ -207,6 +211,7 @@ public class Mage : MonoBehaviour
     public void OnSpell(InputValue value)
     {
         spellPressed = value.isPressed;
+        AudioManager.instance.PlaySFX(spell);
     }
 
     public void OnPrevious(InputValue value)
@@ -309,11 +314,23 @@ public class Mage : MonoBehaviour
     public void Hit()
     {
         if (invincible) return;
+        AudioManager.instance.PlaySFX(hitDmg);
+        anim.SetTrigger("IsHurt");
         MagesHealth.Health -= 1;
         if (MagesHealth.Health == 0)
         {
             StartCoroutine(Resurrect());
         }
+        int dir;
+        if (facingRight)
+        {
+            dir = -1;
+        }
+        else
+        {
+            dir = 1;
+        }
+        rb.linearVelocity = new Vector2(dir * knockbackForce, 12f);
         StartCoroutine(InvincibilityFrames());
     }
     IEnumerator InvincibilityFrames()
@@ -322,7 +339,7 @@ public class Mage : MonoBehaviour
         yield return new WaitForSeconds(1f);
         invincible = false;
     }
-    IEnumerator Resurrect()
+    public IEnumerator Resurrect()
     {
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         anim.SetBool("InAir", true);

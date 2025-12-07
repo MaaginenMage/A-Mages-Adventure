@@ -20,6 +20,15 @@ public class SpellUiManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        foreach (SpellSlot slot in slots)
+        {
+            slot.UpdateCooldown();
+        }
+    }
+
+
     public void HighlightSpell(SpellSO active)
     {
         foreach (SpellSlot slot in slots)

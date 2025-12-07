@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3ddea08db131b9429ea523af83ef27f, type: 3}
   m_Name: Tutorial
   m_EditorClassIdentifier: 
-  npcs: 0000000000000000000000000000000000000000
+  npcs: 000000000000000000000000000000000000000000000000
   dialogue:
   - Mage!
   - You're in a lot of trouble this time, you followed a butterfly here? Just to
@@ -21,3 +21,5 @@ MonoBehaviour:
   - Go right, just... Be aware of anything that moves in there, you'll find your
     way out eventually
   - I hope....
+  - You know how to jump right? that's pretty much all you need. Mind your SPACE
+    Mage.
