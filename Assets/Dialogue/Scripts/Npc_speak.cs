@@ -2,7 +2,10 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+#if UNITY_EDITOR
+using UnityEditor;
 using UnityEditor.UIElements;
+#endif
 
 public class Npc_Speak : MonoBehaviour
 {
